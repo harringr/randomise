@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 
+import itertools
 from numpy.random import choice as numpy_choice
+from pprint import pprint
 from random import choice
 
 class Population(object):
@@ -25,6 +27,39 @@ def generate_population():
     population = []
 
     return population
+
+
+def set_variables():
+    '''Some example variables'''
+    
+    variables = [
+        {
+        'name': 'gender',
+        'options': ['male', 'female']
+        },
+        {
+        'name': 'age',
+        'options': ['18-29', '30-49', '50+']
+        },
+    ]
+    return variables
+
+
+def extract_options(variables):
+    '''Create list of lists of variables
+    e.g. [['var1_option1', 'var1_option2'], [var2_option1, var2_option2]]'''
+
+    options = []
+    for variable in variables:
+        options.append(variable['options'])
+
+    return options
+
+
+def option_combinations(options):
+
+    combinations = list(itertools.product(*options))
+    pprint(combinations)
 
 
 def define_stratified_groups():
@@ -149,6 +184,13 @@ def main():
 
     # Define blocks
     block = define_block()
+
+    # New
+    print "**************\n\n"
+    variables = set_variables()
+    options = extract_options(variables)
+    option_combinations(options)
+
     print "\nFinished\n"
 
 if __name__ == '__main__':
