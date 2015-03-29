@@ -3,12 +3,12 @@
 from numpy.random import choice as numpy_choice
 from random import choice
 
-# class RandomisedPopulation(object):
-#     """ Class to deal with stratified block randomisation """
-#     def __init__(self, variables, population):
-#         super(RandomisedPopulation, self).__init__()
-#         self.variables = variables
-#         self.population = population
+class Population(object):
+    """ Class for a population (of participants) """
+    def __init__(self, variables, population):
+        super(Population, self).__init__()
+        self.variables = variables
+        self.population = population
 
 
 class Participant(object):
