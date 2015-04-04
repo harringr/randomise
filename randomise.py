@@ -20,6 +20,23 @@ class Participant(object):
         self.participant_id = participant_id
 
 
+class Arm(object):
+    """Class for arm of trial"""
+    def __init__(self, name, definition):
+        super(Arm, self).__init__()
+        self.name = name
+        self.definition = definition
+        
+
+class Study(object):
+    """Class to describe research study"""
+    def __init__(self, name, arms, population):
+        super(Study, self).__init__()
+        self.name = name
+        self.arms = arms
+        self.population = population
+        
+
 def generate_population():
     """Generate a set of participants to define a population.
     Need to generate these automatically"""
@@ -31,15 +48,19 @@ def generate_population():
 
 def set_variables():
     '''Some example variables'''
-    
+
     variables = [
         {
         'name': 'gender',
         'options': ['male', 'female']
         },
+        # {
+        # 'name': 'age',
+        # 'options': ['18-29', '30-49', '50+']
+        # },
         {
-        'name': 'age',
-        'options': ['18-29', '30-49', '50+']
+        'name': 'dependents',
+        'options': ['no_dependents', 'has_dependents'],
         },
     ]
     return variables
@@ -61,6 +82,10 @@ def option_combinations(options):
     combinations = list(itertools.product(*options))
     pprint(combinations)
 
+    # Tuples are hashable in python
+    # http://stackoverflow.com/questions/2388302/best-way-to-define-multidimensional-dictionaries-in-python
+
+    return combinations
 
 def define_stratified_groups():
 
@@ -175,6 +200,7 @@ def main():
 
     # Define stratified groups
     groups = define_stratified_groups()
+    print groups
 
     # Population to groups
     population_in_groups = population_to_groups(population, groups)
